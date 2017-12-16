@@ -1,0 +1,92 @@
+$text-color: #606266;
+$emphise-color: #303133;
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial,
+    sans-serif;
+  font-size: 14px;
+  line-height: 1.8;
+  color: $text-color;
+}
+
+img {
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+}
+
+main {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+a {
+  color: $text-color;
+  text-decoration: none;
+
+  &:active,
+  &:hover {
+    color: $emphise-color;
+  }
+}
+
+body {
+  background: url('./images/bg.jpeg') center center / 100% auto  no-repeat;
+}
+
+.post {
+  margin: 50px 0;
+}
+
+.post-title {
+  position: relative;
+  display: inline-block;
+  padding: 0 16px;
+  font-size: 20px;
+  transition: color 0.2s linear;
+
+  &::before {
+    position: absolute;
+    top: -1px;
+    left: 0;
+    display: inline-block;
+    content: '[';
+  }
+  &::after {
+    position: absolute;
+    top: -1px;
+    right: 0;
+    display: inline-block;
+    content: ']';
+  }
+  &::before, &::after {
+    transition: all 0.2s linear;
+  }
+
+  &:hover {
+    &::before {
+      left: 6px;
+    }
+    &::after {
+      right: 6px;
+    }
+  }
+}
+
+.post-summary {
+  h2 {
+    font-size: 18px;
+  }
+}

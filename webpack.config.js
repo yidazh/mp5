@@ -14,14 +14,15 @@ files.forEach(filename => {
   let filePath = postsPath + filename
   let postPath = filename.replace('md', 'html')
   let content = fs.readFileSync(filePath, 'utf8')
+
+  // hexo format
   let meta = {}
   let yamlIndex = content.indexOf('---')
   if (yamlIndex > -1) {
     try {
       meta = yaml.safeLoad(content.substring(0, yamlIndex))
       content = content.substr(yamlIndex + 3)
-    } catch (error) {
-    }
+    } catch (error) {}
   }
 
   let markdown = marked(content)
@@ -48,11 +49,13 @@ files.forEach(filename => {
 })
 
 // index
-htmlPlugins.push(new HtmlWebpackPlugin({
-  template: './src/templates/index.ejs',
-  filename: 'index.html',
-  posts: posts
-}))
+htmlPlugins.push(
+  new HtmlWebpackPlugin({
+    template: './src/templates/index.ejs',
+    filename: 'index.html',
+    posts: posts
+  })
+)
 
 module.exports = {
   entry: {
@@ -62,9 +65,21 @@ module.exports = {
     filename: '[name].js',
     path: __dirname + '/dist'
   },
+  module: {
+    rules: [
+      {
+        test: /\.scss$/,
+        use: ['style-loader', 'css-loader', 'sass-loader']
+      },
+      {
+        test: /\.jpeg$/,
+        use: ['file-loader']
+      }
+    ]
+  },
   plugins: htmlPlugins,
   devServer: {
-    contentBase: path.join(__dirname, "dist"),
+    contentBase: path.join(__dirname, 'dist'),
     compress: true,
     port: 9000
   }
