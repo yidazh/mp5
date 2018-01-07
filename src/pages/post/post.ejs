@@ -12,9 +12,10 @@
 
 <body>
   <header>
-    <%= require('html-loader!./header.html') %>
+    <%= require('html-loader!../../templates/header.html') %>
   </header>
   <main>
+    <h1><%= htmlWebpackPlugin.options.meta.title %></h1>
     <%= htmlWebpackPlugin.options.content %>
   </main>
 </body>

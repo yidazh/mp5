@@ -2,12 +2,15 @@ const fs = require('fs')
 const path = require('path')
 const marked = require('marked')
 const yaml = require('js-yaml')
+const moment = require('moment')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require("extract-text-webpack-plugin")
+const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin')
 
 const htmlPlugins = []
 
 // posts
-const posts = []
+let posts = []
 const postsPath = './src/posts/'
 const files = fs.readdirSync(postsPath)
 files.forEach(filename => {
@@ -22,6 +25,11 @@ files.forEach(filename => {
     try {
       meta = yaml.safeLoad(content.substring(0, yamlIndex))
       content = content.substr(yamlIndex + 3)
+      if (meta.date instanceof Date) {
+        meta.date = moment(meta.date).format('YYYY-MM-DD')
+      } else {
+        meta.date = ''
+      }
     } catch (error) {}
   }
 
@@ -42,24 +50,42 @@ files.forEach(filename => {
     new HtmlWebpackPlugin({
       meta: meta,
       content: markdown,
-      template: './src/templates/post.ejs',
-      filename: postPath
+      template: './src/pages/post/post.ejs',
+      filename: postPath,
+      chunks: ['post'],
+      inlineSource: '.css$'
     })
   )
+})
+
+// sort
+posts.sort((x, y) => {
+  if (x.meta.date && y.meta.date) {
+    return moment(y.meta.date).valueOf() - moment(x.meta.date).valueOf()
+  } else if (x.meta.date) {
+    return -1
+  } else if (y.meta.date) {
+    return 1
+  } else {
+    return 0
+  }
 })
 
 // index
 htmlPlugins.push(
   new HtmlWebpackPlugin({
-    template: './src/templates/index.ejs',
+    template: './src/pages/index/index.ejs',
     filename: 'index.html',
-    posts: posts
+    posts: posts,
+    chunks: ['index'],
+    inlineSource: '.css$'
   })
 )
 
 module.exports = {
   entry: {
-    index: './src/index.js'
+    index: './src/pages/index/index.js',
+    post: './src/pages/post/post.js'
   },
   output: {
     filename: '[name].js',
@@ -69,7 +95,10 @@ module.exports = {
     rules: [
       {
         test: /\.scss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader']
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader', 'sass-loader']
+        })
       },
       {
         test: /\.jpeg$/,
@@ -77,7 +106,13 @@ module.exports = {
       }
     ]
   },
-  plugins: htmlPlugins,
+  plugins: [
+    new ExtractTextPlugin({
+      filename: '[name].css'
+    }),
+    ...htmlPlugins,
+    new HtmlWebpackInlineSourcePlugin()
+  ],
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     compress: true,

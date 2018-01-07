@@ -1,0 +1,61 @@
+@import "../../styles/base.scss";
+
+body {
+  background: url('../../styles/images/bg.jpeg') center / cover no-repeat fixed;
+}
+
+.post {
+  display: block;
+  margin: 30px 0;
+  padding: 20px;
+  background: #eee;
+  box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.12), 0px 2px 2px 0px rgba(0,0,0,0.24);
+  transition: box-shadow 0.2s ease;
+
+  &:hover {
+    box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.12), 0px 8px 8px 0px rgba(0,0,0,0.24);
+  }
+}
+
+.post-title {
+  position: relative;
+  display: inline-block;
+  padding: 0 18px;
+  font-size: 24px;
+  transition: color 0.2s linear;
+
+  &::before {
+    left: 0;
+    content: '[';
+  }
+  &::after {
+    right: 0;
+    content: ']';
+  }
+  &::before, &::after {
+    position: absolute;
+    top: -2px;
+    display: inline-block;
+    transition: all 0.2s linear;
+  }
+
+  &:hover {
+    &::before {
+      left: 6px;
+    }
+    &::after {
+      right: 6px;
+    }
+  }
+}
+
+.post-meta {
+  color: #606266;
+  font-size: 14px;
+}
+
+.post-summary {
+  h2 {
+    font-size: 18px;
+  }
+}

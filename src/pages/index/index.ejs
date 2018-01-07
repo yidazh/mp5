@@ -13,23 +13,25 @@
 
 <body>
   <header>
-    <%= require('html-loader!./header.html') %>
+    <%= require('html-loader!../../templates/header.html') %>
   </header>
   <main>
     <div class="posts">
       <% for (let post of htmlWebpackPlugin.options.posts) { %>
         <div class="post">
-          <a href="<%= post.path %>" class="post-title">
+          <a class="post-title" href="<%= post.path %>">
             <%= post.meta.title %>
           </a>
-          <div class="post-summary">
-          <%= post.summary %>
+          <div class="post-meta">
+            <span>
+              <%= post.meta.date %>
+            </span>
           </div>
-          <div class="post-footer">
-          Date: <%= post.meta.date %>
+          <div class="post-summary">
+            <%= post.summary %>
           </div>
         </div>
-      <% } %>
+        <% } %>
     </div>
   </main>
 </body>
