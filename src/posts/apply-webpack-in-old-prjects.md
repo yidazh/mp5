@@ -8,11 +8,11 @@ tags:
 - Webpack
 ---
 
-![Webpack](https://o35qld6sq.qnssl.com/img/webpack-install.jpeg)
+![Webpack](https://2mih-static-1255626632.file.myqcloud.com/webpack-install.jpeg)
 
 来这边也大半年了，经手的项目也好几个了，大部分的项目前端部分依旧停留在原始年代，虽说前端现在很多可以归为瞎折腾，但是很多工程思想是很有意义去推进的。比如，模块化、自动化等，在各种工程领域应该都是不可或缺的吧。
 
-<!--more-->
+<!-- more -->
 
 目前项目里的前端现状是：
 

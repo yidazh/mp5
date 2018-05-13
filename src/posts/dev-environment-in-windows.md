@@ -9,7 +9,7 @@ tags:
 
 ---
 
-![](https://o35qld6sq.qnssl.com/img/front-end.jpeg)
+![](https://2mih-static-1255626632.file.myqcloud.com/front-end.jpeg)
 
 目前就职的厂偏大偏传统，再加上我所在的部门不是前端部门，申请不到Mac设备，就只能在Windows平台下做开发了，此处想念么么嗖3秒。今天写写Windows平台下的个人开发环境搭建。
 

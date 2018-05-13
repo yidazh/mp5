@@ -100,17 +100,17 @@ Converts the request connection to a transparent TCP/IP tunnel, usually to facil
 
 测试了下：浏览器通过GoAgent代理，GoAgent本身配置二级代理到[Fiddler](http://www.telerik.com/fiddler)，检测GoAgent发出的请求情况，因为GoAgent全程使用HTTPS加密传输，Fiddler未开启解密HTTPS时：GoAgent请求包清一色发给 www.google.com ，因为Fiddler是本地二级代理，所以只能看到CONNECT请求。
 
-![GoAgent请求-HTTPS](https://o35qld6sq.qnssl.com/2014-05-20%2023-58-18.png)
+![GoAgent请求-HTTPS](https://2mih-static-1255626632.file.myqcloud.com/2014-05-20%252023-58-18.png)
 
 开启Fiddler的HTTPS解密后，再看看CONNECT请求里的具体内容吧，一个CONNECT对应一个HTTPS，均是请求到GAE代理APP：appid.appspot.com
 
-![GoAgent请求](https://o35qld6sq.qnssl.com/2014-05-20%2023-58-19.png)
+![GoAgent请求](https://2mih-static-1255626632.file.myqcloud.com/2014-05-20%252023-58-19.png)
 
 GoAgent不支持传统CONNECT,那HTTPS本身是怎样进行代理的呢？就像Fiddler一样，将HTTPS解密再加密完成代理，也就是HTTPS内容在GAE上暴露过，所以GoAgent HTTPS代理本身并非安全的。因此，第一次运行GoAgent时需要导入证书。
 
 画了一张GoAgent代理陆续流程图：
 
-<iframe id="embed_dom" name="embed_dom" frameborder="0" style="border:1px solid #000;display:block;width:900px; height:700px;" src="http://www.processon.com/embed/537ca51f0cf27549ed2e26a0">
+<iframe id="embed_dom" name="embed_dom" frameborder="0" style="border:1px solid #000;display:block;width:900px; height:700px;" src="https://www.processon.com/embed/537ca51f0cf27549ed2e26a0">
 </iframe>
 
 不会Patyhon，没法研究源代码，个人推测：我们的GoAgent接收到的CONNECT 请求（包括普通HTTPS请求、以及SSH代理请求）,会直接STRIP掉，然后视为HTTPS进行解密，解密之后再封装发给GAE。而我们的SSH包，自然无法按照SSL进行解密。就算用STUNNEL SSL 加密后发给GOAGENT，GOAGENT解密后发现这个不是HTTP请求，仍然没法封装给GAE。
@@ -155,7 +155,7 @@ INFO - [May 23 23:21:02] 127.0.0.1:39535 "URL GET http://REMOTE_HOST:8080/index.
 
 能看到Http 通信但是服务端返回的内容长度为0。后续用Windows下的Fiddler的看了下HTTP 通信，一样的情况：服务端返回Content-Length 不为0，但是内容为0，有点尴尬。
 
-![SSH Over HTTP](https://o35qld6sq.qnssl.com/2014-05-20%2023-58-20.png)
+![SSH Over HTTP](https://2mih-static-1255626632.file.myqcloud.com/2014-05-20%252023-58-20.png)
 
 后面并没有继续探索为什么经过代理这个工具就不能正常的发送HTTP包了。后面在网上找了下[HTTP代理](https://www.hidemyass.com/proxy-list/)作了下测试，该工具是可以走代理的，但我想本系列折腾应该到此结束了，是时候找本《HTTP权威指南》读一读啦。基本概念的理解缺失对于问题的判断产生了误导作用，瞎折腾也不是事儿。。。
 

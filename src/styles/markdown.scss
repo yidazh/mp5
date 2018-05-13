@@ -1,0 +1,77 @@
+@import './variables.scss';
+
+.post {
+  margin-top: 30px;
+
+  .post-title {
+    color: $title-color;
+  }
+
+  a {
+    color: $dark-color;
+  }
+
+  p {
+    margin: 20px 0;
+
+    &:first-child {
+      margin-top: 0;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  hr {
+    border-color: $light-color;
+  }
+
+  blockquote {
+    background: #f9f9f9;
+    border-left: 10px solid $light-color;
+    margin: 1.5em 0;
+    padding: 0.5em 10px;
+    quotes: '\201C' '\201D' '\2018' '\2019';
+    font-style: italic;
+  }
+
+  blockquote::before {
+    color: $light-color;
+    content: open-quote;
+    font-size: 4em;
+    line-height: 0.1em;
+    margin-right: 0.25em;
+    vertical-align: -0.4em;
+  }
+
+  blockquote p {
+    display: inline;
+  }
+
+  code.inline {
+    margin: 0 3px;
+    padding: 0 6px;
+    background-color: rgba($color: $light-color, $alpha: 0.8);
+    border-radius: 3px;
+  }
+
+  pre code {
+    background-color: rgba($color: $light-color, $alpha: 0.6);
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      padding-left: 1em;
+      text-indent: -0.7em;
+
+      &::before {
+        content: '• ';
+        color: $dark-color;
+      }
+    }
+  }
+}

@@ -9,13 +9,13 @@ tags:
 
 ---
 
-![Travis CI](https://o35qld6sq.qnssl.com/img/Travis-CI-logo.jpg)
+![Travis CI](https://2mih-static-1255626632.file.myqcloud.com/Travis-CI-logo.jpg)
 
 之前博客都是本地用`Hexo`生成好了，手动上传至`VPS`，可能由于写的少所以虽觉繁琐但还不是很麻烦。最近又更了一票，想起之前经常看到的`Travis CI`自动部署至`Github Pages`，想来我也应该弄下持续集成。
 
 打开`Travis CI`文档看了看，大概明白了，`Travis CI`把Repo克隆下来，然后按照配置文件，一步一步搭建环境，执行脚本达到部署的目的。到了`Hexo`这里，自然很简单，配好`node`环境，`npm install`后，执行`hexo g`即可得到我们要部署的`public`内容。
 
-<!--more-->
+<!-- more -->
 
 就是最后一步，把生成的静态文件部署至目标位置上，这个稍微麻烦点。`Google`出来的参考文章大多都是自动部署至`Github Pages`，看了下他们的脚本，通过`Git`将`public`提交至对应的`Git`仓库即可。可以用`Heox`自带的`deploy`也可以用写脚本提交`Git`。
  - [使用 Travis CI 自動發布 hexo 到 Github pages](https://levirve.github.io/2016/hexo-deploy-through-travisci/)

@@ -11,7 +11,7 @@ tags:
 
 近日写移动端页面要写一个日历，设计师MM指着设计稿上的数字曰：这是方正喵呜体，然后又指着上面的星期几曰：这是方正少儿简体，你看着办吧。我心里呵呵。我说字体问题稍后再说吧。人家掷地有声的强调：不行，不行的话一个一个的切成图......
 
-![](https://o35qld6sq.qnssl.com/img/2015-11-15/Can-a-Web-Developer-Also-be-a-Web-Designer-1.jpg)
+![](https://2mih-static-1255626632.file.myqcloud.com/Can-a-Web-Developer-Also-be-a-Web-Designer-1.jpg)
 
 <!-- more -->
 
@@ -31,17 +31,17 @@ tags:
 
 打开下载下来的方正喵呜字体长这样，Unicode分类里，数字在拉丁文下面，我们的汉字在“中日韩统一象形文字”(CJK)下面：
 
-![](https://o35qld6sq.qnssl.com/img/2015-11-15/2.PNG)
+![](https://2mih-static-1255626632.file.myqcloud.com/2.PNG)
 
 然后新建字体，新建的字体会默认带有一些基本字符，既然定制，就要合身，删掉不需要的字符，减少字体文件体积。
 
-![](https://o35qld6sq.qnssl.com/img/2015-11-15/3.PNG)
+![](https://2mih-static-1255626632.file.myqcloud.com/3.PNG)
 
 我这里全部删空后，再按需加上。然后从喵呜体中找到对应的字符，复制过来。（一个一个的Ctrl + C / V有点累，不知有无其他简便的法子）因为需求中用到了2种字体，然后就把2种字体糅合在一起了：
 
-![](https://o35qld6sq.qnssl.com/img/2015-11-15/compare.jpg)
+![](https://2mih-static-1255626632.file.myqcloud.com/compare.jpg)
 
-![](https://o35qld6sq.qnssl.com/img/2015-11-15/1.PNG)
+![](https://2mih-static-1255626632.file.myqcloud.com/1.PNG)
 
 最后就可以导出定制字体了，FontCreator可以导出TTF和WOFF，由于我只需要适配移动端页面，就只用了这2种格式，导出的文件大小均小于5KB。有需要的可以利用在线工具导出EOT和SVG。[WEBFONT GENERATOR](http://www.fontsquirrel.com/tools/webfont-generator)
 
@@ -63,7 +63,7 @@ tags:
 
 采用后效果如下，`font-size` `color`随意用：
 
-![](https://o35qld6sq.qnssl.com/img/2015-11-15/demo.jpg)
+![](https://2mih-static-1255626632.file.myqcloud.com/demo.jpg)
 
 其实字体文件也可以Embed in CSS，就像用Base64方法将小图片inline进CSS一样，同样可以通过Base64处理小的Font文件的。打开前面提到的字体转换工具，选中"Expert"模式，就可以在下面选择"Base64 Encode"。这样既能减少请求数，也能规避跨域问题，比较适合体积较小的字体文件。或者用其他的Base64转码工具。
 

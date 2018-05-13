@@ -1,1 +1,10 @@
-@import "../../styles/base.scss";
+@import '../../styles/base.scss';
+@import '../../styles/markdown.scss';
+
+.post {
+  margin-top: 30px;
+
+  .post-title {
+    color: $title-color;
+  }
+}

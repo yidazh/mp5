@@ -7,7 +7,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-  <title><%= htmlWebpackPlugin.options.meta.title || '' %></title>
+  <title>
+    <%= htmlWebpackPlugin.options.meta.title %>
+  </title>
 </head>
 
 <body>
@@ -15,8 +17,31 @@
     <%= require('html-loader!../../templates/header.html') %>
   </header>
   <main>
-    <h1><%= htmlWebpackPlugin.options.meta.title %></h1>
-    <%= htmlWebpackPlugin.options.content %>
+    <div class="post">
+      <h1 class="post-title">
+        <%= htmlWebpackPlugin.options.meta.title %>
+      </h1>
+      <span class="post-meta">
+        <%= htmlWebpackPlugin.options.meta.date %>
+      </span>
+      <%= htmlWebpackPlugin.options.content %>
+    </div>
+    <div id="disqus_thread"></div>
+    <script>
+      var disqus_config = function () {
+        this.page.url = location.href;
+        this.page.identifier = '<%= htmlWebpackPlugin.options.meta.id %>';
+      };
+      (function () { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = 'https://2mih.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+    </noscript>
   </main>
 </body>
 

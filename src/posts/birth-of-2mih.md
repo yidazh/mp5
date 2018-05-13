@@ -41,7 +41,7 @@ _下面记录下博客程序中具体的方面_
 
 ## 评论
 
-![多说][6]
+![多说](https://2mih-static-1255626632.file.myqcloud.com/ff80808142c5ed7f0142c6bb08cc12fe.png)
 
 由于Hexo很多主题使用国际上流行的第三方评论：Disqus，有人(包括我)可能希望替换成本土的多说、友言之类。部分主题已经改成默认[多说][10]，只需在主题的配置文件里配置好多说的 `shortname` 即可。
 
@@ -102,13 +102,13 @@ OK,完成。这里用配置的方式填入多说shortname，稍微麻烦了点�
 
 访问统计采用了Google Analytics，同时也一并开启了Google 站长工具。不过，由于国内的特殊环境，Google服务在国内的可用性真是让人捉急，GA的`ga.js`常常无法加载，网站用到的Google Web Fonts也时时阵亡。受不了这些的可以采用国内的替代品，百度统计、站长工具等。
 
-![Google Analytics][4]
+![Google Analytics](https://2mih-static-1255626632.file.myqcloud.com/Google-Analytics-Long.png)
 
 #### 监控
 
 监控则采用了[监控宝][11]配合SNMP进行主机环境监控，网站刚搭好时监控的实际意义小于形式意义。启用监控宝的服务器监控主要在于服务器启用SNMP，SNMP配置恰当，做好安全措施，修改community字符串，限制外网SNMP访问IP等。
 
-![监控宝][5]
+![监控宝](https://2mih-static-1255626632.file.myqcloud.com/2014-06-08%252009-44-10.png)
 
 ## 其他
 - 主机是[Digital Ocean][7]的，一个10$的代金券成功把我留住...

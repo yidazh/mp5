@@ -17,7 +17,7 @@ tags:
 
 前两个月的时间里，有幸接触到即时通讯领域的一些内容，认识了基于XMPP的开源RTC Server [Openfire][1]以及开源的XMPP客户端[Spark][2]。由于项目的需求，采用Openfire + Spark的方案来完成即时通讯，然后对Spark进行了必要的社会主义改造。
 
-![Openfire][17]
+![Openfire](https://2mih-static-1255626632.file.myqcloud.com/of.png)
 
 由于该方面的应用大多局限在企业内部，相关的资料不大好找，期间也遇到了不少的坑，好在经过艰辛的爬坑过程，大部分问题都得以解决。因此也希望以博文的形式给正在研究Spark的苦逼娃一点帮助。
 
@@ -44,13 +44,13 @@ Sarpk官方正式版最新的是2.6.3，于2011年发布的，官网上也放出
 - Windows 7 SP1
 
 在MyEclipse中新建一个Java项目SparkDemo，JRE指定为1.7+，下拉栏里没有的，去 `Configure JREs` 里添加，这里最好选择使用Java 7，因为在Build时，默认要求JRE最低版本是Java 7，后面也会提到。 
-![New Java Project][5]
+![New Java Project](https://2mih-static-1255626632.file.myqcloud.com/project-jre.png)
 
 然后`Finish`完成项目创建。
 
 接着将下载下来的Spark源代码拖进项目的目录下，这个时候会看到`src`目录下会有很多报错提示，没关系。进入项目的Build Path设置里，将`src`目录从Source栏中移除。然后将Spark主体源码`src/java`以及Fastpath插件源码`src/plugins/fastpath/src/java`加入到Source栏中。如果自己开发Spark插件或者改造其他插件，设置类似。
 
-![Source Configuration][6]
+![Source Configuration](https://2mih-static-1255626632.file.myqcloud.com/source-config.png)
 
 ###  引入lib
 
@@ -78,7 +78,7 @@ Sarpk官方正式版最新的是2.6.3，于2011年发布的，官网上也放出
     - `src/resources`
     - `src/plugins/fastpath/src/resources`
 
-  ![User Entries Configuration][7]
+  ![User Entries Configuration](https://2mih-static-1255626632.file.myqcloud.com/UserEntries.png)
   
 - Arguments：VM arguments中加入
 
@@ -96,21 +96,21 @@ Sarpk官方正式版最新的是2.6.3，于2011年发布的，官网上也放出
 
 设置完毕后，我们就可以按照该Run config进行Run或者Debug了。运行后，就可以看到Spark的登录界面了。
 
-![Run Spark][8]
+![Run Spark](https://2mih-static-1255626632.file.myqcloud.com/RunSpark.png)
 
 输入可用的Openfire服务器以及用户名密码登录后，即可看到Spark的主界面了。Openfire服务器的搭建及简单使用详情请Google，这里就不予以说明。然而Fastpath插件，这里没有显示出来，原因在后面会提到。
 
-![Spark][9]
+![Spark](https://2mih-static-1255626632.file.myqcloud.com/Spark.png)
 若开启了Smack Debug，还会出现Smack Debug窗口。
 
-![Smack Debug][10]
+![Smack Debug](https://2mih-static-1255626632.file.myqcloud.com/SmarckDebug.png)
 
 运行时，可能会出现`bin`目录拒绝访问的异常，原因是Spark自带的一个插件`LanguagePlugin`会在试图在运行目录下面寻找spark.jar，但是调试时`bin`目录下缺少spark.jar。该问题在spark安装版本时不会出现，调试时可以直接忽略，或者通过下面的`build release`生成`target\build\lib\spark.jar`，然后拷贝至MyEclipse的项目`bin`目录下面。
 
 ### Build
 
 再来看看Spark客户端的构建，进入项目的Build目录中，查看build.xml，里面定义了各种build target。可以打开MyEclipse的Ant窗口，将该build文件加入其中。
-![Ant Window][11]
+![Ant Window](https://2mih-static-1255626632.file.myqcloud.com/AntWin.png)
 直接运行默认的target：release。提示Build Successful，项目目录下新增了一个target文件夹。进入`target/build/bin`目录，然后运行 bat或者 sh文件，即可启动Spark。
 
 执行Build任务时，可能会遇到Java 版本错误、编译版本错误等问题，导致Build 失败。留意Ant Build 文件中Java Version、Ant Version、Javac Target要求。
@@ -131,7 +131,7 @@ Sarpk官方正式版最新的是2.6.3，于2011年发布的，官网上也放出
 
 Build之后，MyEclipse中的SparkDemo项目出现了错误提示，该错误是ANT 运行时产生的编译警告，可以在Problems窗口中删除该部分警告即可。
 
-![Delete Compiling Warnings][12]
+![Delete Compiling Warnings](https://2mih-static-1255626632.file.myqcloud.com/DeleteComplierWarnings.png)
 
 Build文件中还定义了其他的Target，如`clean`，Build后运行Clean执行清理任务; `installer.install4j` , 配合 Install4j生成 Spark 的安装包。可以根据需要进行使用，使用过程中遇到问题可根据 Ant报错提示来进行调整。
 
@@ -155,7 +155,7 @@ SHORT_NAME = Spark
 APPLICATION_VERSION = 2.6.3
 ```
 我们这里可以将Spark版本改为2.7.0。然后再运行程序，就能看见正常加载进Fastpath插件了。
-![Fastpath][13]
+![Fastpath](https://2mih-static-1255626632.file.myqcloud.com/Fastpath.png)
 
 有时运行Spark后会碰到Spark中出现2个相同的插件，此时清空Spark工作目录再重新运行即可。Windows下`Win + R`输入 `%appdata%` 然后确定，进入AppData目录，删除Spark目录即可。
 
@@ -367,11 +367,11 @@ chat.sendMessage(chatMessage);
 
 Fastpath中接收到图片如下：
 
-![Image Message][14]
+![Image Message](https://2mih-static-1255626632.file.myqcloud.com/image-chat.png)
 
 最后我们来看看搭载图片的XMPP消息包的具体内容：
 
-![Image XMPP][15]
+![Image XMPP](https://2mih-static-1255626632.file.myqcloud.com/ImagePacket.png)
 
 在message body的后面出现了我们的自定义扩展内容，`encoded`元素内存放的则是图片的Base64转码。
 
